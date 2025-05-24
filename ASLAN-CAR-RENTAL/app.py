@@ -441,6 +441,6 @@ def kirala(car_id):
     flash(f"{araba.marka} {araba.model} aracı başarıyla kiralandı! Toplam Tutar: {toplam_tutar:.2f} TL", 'success') # Flash mesajına tutarı ekledim
     return redirect(url_for('rezervasyonlarim'))
 
-
-if __name__ == '__main__':
-    app.run(debug=True)
+import os
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
