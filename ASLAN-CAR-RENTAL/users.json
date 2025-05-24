@@ -1,0 +1,54 @@
+[
+    {
+        "id": 1,
+        "username": "fevvat",
+        "email": "fevvat@gmail.com",
+        "password_hash": "scrypt:32768:8:1$hxwz9wrbAgNRfPbL$0b1047f3988f293f3be971513465ee359ff2e1081e67660c9859b7b4ad3952036803e03862e3d9bc54060e8873c937f9cb9939de3f905e3667ff5fe6d513d4ff",
+        "full_name": "Ferhat Aslan",
+        "phone": "05356328282",
+        "city": "Ankara",
+        "district": "Sincan",
+        "address": "Yenikent",
+        "profile_image_url": null,
+        "role": "admin"
+    },
+    {
+        "id": 2,
+        "username": "Ferhat",
+        "email": "ferhat@gmail.com",
+        "password_hash": "123",
+        "full_name": null,
+        "phone": null,
+        "city": null,
+        "district": null,
+        "address": null,
+        "profile_image_url": null,
+        "role": "user"
+    },
+    {
+        "id": 3,
+        "username": "admin",
+        "email": "admin@example.com",
+        "password_hash": "scrypt:32768:8:1$HnYpQLcwZarby15F$566345a9dc6b0f2de6591837a0839e724b546fbd57ce4d36b939d38b4c2d27f872072cef5da89e25c7a7104e27aa44d87746df4c7de1394035374716db58ded8",
+        "full_name": null,
+        "phone": null,
+        "city": null,
+        "district": null,
+        "address": null,
+        "profile_image_url": null,
+        "role": "'admin'"
+    },
+    {
+        "id": 4,
+        "username": "berkay",
+        "email": "berkay@gmail.com",
+        "password_hash": "scrypt:32768:8:1$zWdRAeggZyA8Y6Ob$ab17374869798ae9a0deb36c5e505f9d4e0cf0395f7facd51cc94fef9f2aecbd2d3a37b9047fcf1d13f89067c244be58a0af39bb9147e41364b4b33b3156fc93",
+        "full_name": null,
+        "phone": null,
+        "city": null,
+        "district": null,
+        "address": null,
+        "profile_image_url": null,
+        "role": "user"
+    }
+]

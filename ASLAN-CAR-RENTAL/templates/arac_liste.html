@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Araç Yönetimi - ASLAN Car Rental</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/aracliste.css') }}" />
+</head>
+<body>
+  <nav class="sidebar">
+    <h3>ASLAN Car Rental</h3>
+    <ul id="admin-menu" class="nav flex-column">
+      <li class="nav-item"><a href="/admin-panel" class="nav-link"><i class="bi bi-speedometer2"></i> Ana Sayfa</a></li>
+      <li class="nav-item"><a href="/admin/araclar" class="nav-link active"><i class="bi bi-car-front-fill"></i> Araç İşlemleri</a></li>
+    </ul>
+  </nav>
+
+  <main class="main-content">
+    <header class="page-header">
+      <h1>Araç Yönetimi</h1>
+      <div class="user-info" title="Profil">
+        <i class="bi bi-person-circle"></i>
+        <span id="current-user">Admin</span>
+      </div>
+    </header>
+
+    <section class="filters">
+      <form role="search" action="" method="GET">
+        <input type="search" name="q" class="form-control" placeholder="Araç Ara..." aria-label="Araç Ara" />
+        <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+      </form>
+
+      <div class="filter-group">
+        <label for="markaFiltre">Marka:</label>
+        <select class="form-select" id="markaFiltre" name="markaFiltre" aria-label="Marka Filtre">
+          <option value="">Hepsi</option>
+          <option value="Fiat">Fiat (İtalyan)</option>
+          <option value="Renault">Renault (Fransız)</option>
+          <option value="Ford">Ford (Amerikan)</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label for="durumFiltre">Durum:</label>
+        <select class="form-select" id="durumFiltre" name="durumFiltre" aria-label="Durum Filtre">
+          <option value="">Farketmez</option>
+          <option value="Müsait">Müsait</option>
+          <option value="Kirada">Kirada</option>
+        </select>
+      </div>
+    </section>
+
+    <section class="vehicle-list">
+      <table class="table table-bordered table-hover mt-4">
+        <thead class="table-light">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Marka</th>
+            <th scope="col">Model</th>
+            <th scope="col">Yıl</th>
+            <th scope="col">Günlük Fiyat (₺)</th>
+            <th scope="col" class="text-center">Durum</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for arac in araclar %}
+          <tr>
+            <td>{{ arac.id }}</td>
+            <td>{{ arac.marka }}</td>
+            <td>{{ arac.model }}</td>
+            <td>{{ arac.yil }}</td>
+            <td>{{ "%.2f"|format(arac.fiyat_gunluk) }}</td>
+            <td class="text-center">
+              {% if arac.durum == 'Kirada' %}
+                <span class="badge bg-warning text-dark">Kirada</span>
+              {% elif arac.durum == 'Müsait' %}
+                <span class="badge bg-success">Müsait</span>
+              {% else %}
+                <span class="badge bg-secondary">Bilinmiyor</span>
+              {% endif %}
+            </td>
+          </tr>
+          {% else %}
+          <tr><td colspan="6" class="text-center text-muted">Kayıtlı araç bulunmamaktadır.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

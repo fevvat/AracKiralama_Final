@@ -1,0 +1,196 @@
+        :root {
+            --primary-color: #4A90E2; /* Mavi */
+            --secondary-color: #6C757D; /* Koyu Gri (Geri dön butonu için) */
+            --background-color: #F8F9FA; /* Açık Gri */
+            --text-color: #333; /* Koyu Gri */
+            --card-background: #FFFFFF; /* Beyaz */
+            --border-color: #E0E0E0; /* Açık Gri Kenarlık */
+            --input-border-focus: #8EC0F7; /* Mavi (input focus) */
+            --button-hover-primary: #3A7BBF;
+            --button-hover-secondary: #5A6268;
+            --success-color: #28A745; /* Yeşil */
+            --danger-color: #DC3545; /* Kırmızı */
+            --info-color: #17A2B8; /* Mavi-Yeşil */
+            --warning-color: #FFC107; /* Sarı */
+        }
+
+        /* Genel Stil Sıfırlama ve Font */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* İçeriği yukarıdan başlat */
+            min-height: 100vh; /* Tam ekran yüksekliği */
+            box-sizing: border-box;
+            padding-top: 50px; /* Üstten boşluk */
+        }
+
+        .container {
+            background-color: var(--card-background);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+            border: 1px solid var(--border-color);
+            box-sizing: border-box;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-weight: 700;
+            font-size: 2.2em;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Form elemanları arası boşluk */
+            text-align: left;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: block; /* Label'ın kendi satırında olması için */
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1em;
+            box-sizing: border-box; /* Padding'in genişliğe dahil olması için */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--input-border-focus);
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2); /* Hafif odak gölgesi */
+        }
+
+        button[type="submit"] {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            margin-top: 10px; /* Buton ile son input arası boşluk */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button[type="submit"]:hover {
+            background-color: var(--button-hover-primary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Geri Dön Linki */
+        .back-link {
+            display: inline-block; /* Buton gibi davranması için */
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1em;
+            margin-top: 30px; /* Form ile geri dön butonu arası boşluk */
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+        }
+
+        .back-link:hover {
+            background-color: var(--button-hover-secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Flash Mesajları */
+        .flashes {
+            list-style: none;
+            padding: 0;
+            margin-top: 30px;
+            text-align: left;
+        }
+
+        .flashes li {
+            padding: 12px 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            font-weight: 500;
+            border: 1px solid transparent;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+        }
+
+        .flashes li.success {
+            background-color: #D4EDDA;
+            color: var(--success-color);
+            border-color: #C3E6CB;
+        }
+
+        .flashes li.danger {
+            background-color: #F8D7DA;
+            color: var(--danger-color);
+            border-color: #F5C6CB;
+        }
+
+        .flashes li.info {
+            background-color: #D1ECF1;
+            color: var(--info-color);
+            border-color: #BEE5EB;
+        }
+
+        .flashes li.warning {
+            background-color: #FFF3CD;
+            color: var(--warning-color);
+            border-color: #FFEBA3;
+        }
+
+        /* Duyarlı Tasarım */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+                width: 95%;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            input[type="text"],
+            input[type="number"] {
+                padding: 10px 12px;
+            }
+
+            button[type="submit"],
+            .back-link {
+                padding: 12px 20px;
+                font-size: 1em;
+            }
+        }

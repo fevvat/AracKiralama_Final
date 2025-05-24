@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Rezervasyonlarım{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Rezervasyonlarım</h2>
+    <a href="/" class="btn btn-danger btn-sm mt-3">
+        <i class="bi bi-house-door-fill me-2"></i> Anasayfaya Dön
+    </a>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ 'danger' if category == 'error' else category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% if rezervasyonlar %}
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Araç</th>
+                <th>Başlangıç Tarihi</th>
+                <th>Bitiş Tarihi</th>
+                <th>Alış Yeri</th>
+                <th>İade Yeri</th>
+                <th>Toplam Tutar</th>
+                <th>İşlem</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in rezervasyonlar %}
+            <tr>
+                <td>{{ r.car.marka }} {{ r.car.model }}</td>
+                <td>{{ r.baslangic_tarihi.strftime('%Y-%m-%d') }}</td>
+                <td>{{ r.bitis_tarihi.strftime('%Y-%m-%d') }}</td>
+                <td>{{ r.alis_yeri }}</td>
+                <td>{{ r.iade_yeri }}</td>
+                <td>{{ r.toplam_tutar }} ₺</td>
+                <td>
+                    {% if not r.iade_edildi %}
+                        <form method="POST" action="{{ url_for('iade_et', rezervasyon_id=r.id) }}">
+                            <button class="btn btn-sm btn-success" type="submit">İade Et</button>
+                        </form>
+                    {% else %}
+                        <span class="badge bg-secondary">İade Edildi</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>Henüz bir rezervasyonunuz yok.</p>
+    {% endif %}
+</div>
+{% endblock %}

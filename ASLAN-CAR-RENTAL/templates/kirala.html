@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Araç Kiralama{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Kirala: {{ araba.marka }} {{ araba.model }} ({{ araba.yil }})</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ 'danger' if category == 'error' else category }}">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        <div class="mb-3">
+            <label for="baslangic_tarihi" class="form-label">Başlangıç Tarihi</label>
+            <input type="date" class="form-control" id="baslangic_tarihi" name="baslangic_tarihi" required>
+        </div>
+        <div class="mb-3">
+            <label for="bitis_tarihi" class="form-label">Bitiş Tarihi</label>
+            <input type="date" class="form-control" id="bitis_tarihi" name="bitis_tarihi" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Kirala</button>
+        <a href="{{ url_for('arabalarimiz') }}" class="btn btn-secondary">Geri</a>
+    </form>
+</div>
+{% endblock %}

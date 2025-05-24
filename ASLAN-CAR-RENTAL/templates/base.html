@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Aslan Oto Kiralama {% endblock %}</title>
+
+    {# Bootstrap CSS (Tekrar eden link kaldırıldı, sadece 5.3.3 sürümü kaldı) #}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    {# Bootstrap Icons CSS (rezervasyonlarim.html'de kullanılan 'bi' sınıfları için gerekli) #}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    {# Font Awesome CSS (Eğer projenizde Font Awesome ikonları da kullanıyorsanız kalsın) #}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    {# Kendi özel CSS dosyanız (isteğe bağlı - Bootstrap'ten sonra gelmeli) #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    {# Favicon #}
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+
+    {# Meta Tagları (SEO ve Sosyal Medya) #}
+    <meta name="description" content="Gümüşhane ve oralar için araç kiralama. Bizde bolca araba var, uygun fiyatlı diyoruz.">
+    <meta name="keywords" content="araç kiralama, oto kiralama, Gümüşhane, araba kiralama, rent a car, ucuz araç kiralama gibi">
+    <meta name="author" content="Aslan Oto Kiralama Ekibi (Acemi İşler)">
+
+    {# Open Graph Meta Tagları (Sosyal medya paylaşımı için) #}
+    <meta property="og:title" content="{% block og_title %}Aslan Oto Kiralama{% endblock %}">
+    <meta property="og:description" content="Gümüşhane ve çevresinde araba kiralıyoruz. Bir sürü arabamız var, fiyatlar da iyi sayılır.">
+    <meta property="og:image" content="{{ url_for('static', filename='images/logo-social.png') }}">
+    <meta property="og:url" content="{{ request.url }}">
+    <meta property="og:type" content="website">
+
+    {# Twitter Card Meta Tagları #}
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="{% block twitter_title %}Aslan Oto Kiralama{% endblock %}">
+    <meta property="twitter:description" content="Gümüşhane ve yakınlarında araba kiralamak isteyenler buraya! Uygun fiyatlar ve çeşitli araçlar bizde.">
+    <meta property="twitter:image" content="{{ url_for('static', filename='resimler/x.png') }}"> {# resimler/x.png path'ini kontrol edin, images/ altına koymak daha standart olabilir #}
+</head>
+<body>
+
+    {# Flash mesajlar burada gösterilecek #}
+    <div class="container mt-3">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    {# Bootstrap 5 alert sınıfları ve kapatma butonu #}
+                    <div class="alert alert-{{ category }} alert-dismissible fade show auto-dismiss" role="alert">
+                        {{ message | safe }} {# HTML etiketlerine izin vermek için | safe eklenebilir #}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    {# Ana içerik alanı #}
+    {# mt-5 ve pt-5 sınıfları üstte boşluk bırakır, navbar varsa alta gelmesini sağlar #}
+    <main class="mt-5 pt-5">
+        {% block content %}
+            {# Bu kısım alt şablonlar tarafından doldurulacak #}
+            {# Eğer base.html doğrudan çalıştırılırsa görünecek varsayılan içerik #}
+             <div class="container mt-5">
+                 <h1>Ana Sayfa İçeriği</h1>
+                 <p>Burası diğer sayfalar tarafından doldurulacak. Yani alt şablonlar burayı değiştirecek.</p>
+             </div>
+        {% endblock %}
+    </main>
+
+    {# Bootstrap JavaScript Bundle (Popper.js dahil) #}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+    {# Kendi özel JavaScript dosyanız (isteğe bağlı) #}
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    {# Flash mesajları otomatik kapatma scripti #}
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            // Bootstrap Alert bileşenlerinin yüklendiğinden emin olmak için kısa bir gecikme
+            setTimeout(() => {
+                const alerts = document.querySelectorAll('.alert.auto-dismiss');
+                alerts.forEach(alert => {
+                    // Bootstrap Alert instance'ını al
+                    const bsAlert = bootstrap.Alert.getOrCreateInstance(alert);
+                    // Alert'i kapat (fade animasyonu ile)
+                    setTimeout(() => {
+                        bsAlert.close();
+                    }, 3000); // 3 saniye sonra kapat
+                });
+            }, 100); // DOM yüklendikten sonra kısa bekleme
+        });
+    </script>
+
+</body>
+</html>

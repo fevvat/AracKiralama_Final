@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Tüm Kiralamalar{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center text-primary">Tüm Kiralama Kayıtları</h2>
+    <div class="table-responsive">
+        <table class="table table-hover table-bordered bg-white shadow-sm rounded">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>Kullanıcı</th>
+                    <th>Araç</th>
+                    <th>Başlangıç</th>
+                    <th>Bitiş</th>
+                    <th>Alış Yeri</th>
+                    <th>İade Yeri</th>
+                    <th>Toplam Tutar</th>
+                    <th>İade Durumu</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rezervasyon in kiralamalar %}
+                <tr>
+                    <td>{{ rezervasyon.id }}</td>
+                    <td>{{ rezervasyon.user.full_name or rezervasyon.user.username }}</td>
+                    <td>{{ rezervasyon.car.marka }} {{ rezervasyon.car.model }}</td>
+                    <td>{{ rezervasyon.baslangic_tarihi.strftime('%Y-%m-%d') }}</td>
+                    <td>{{ rezervasyon.bitis_tarihi.strftime('%Y-%m-%d') }}</td>
+                    <td>{{ rezervasyon.alis_yeri }}</td>
+                    <td>{{ rezervasyon.iade_yeri }}</td>
+                    <td>{{ rezervasyon.toplam_tutar }}₺</td>
+                    <td>
+                        {% if rezervasyon.iade_edildi %}
+                            <span class="badge bg-success">İade Edildi</span>
+                        {% else %}
+                            <span class="badge bg-danger">Kirada</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
